@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import styles from '../../styles/Home.module.css'
 import Layout from '../../components/layout';
-import Script from 'next/script';
 
 
 export default function FirstPost() {
+  const entries = performance.getEntriesByType("navigation");
+  entries.forEach((entry) => {
+    console.log("SSR", entry.type);
+  });
   return (
     <Layout>
     <Head>
@@ -14,4 +15,8 @@ export default function FirstPost() {
       <h1>First Post</h1>
     </Layout>
   );
+}
+export async function getServerSideProps() {
+  const data = {};
+  return {props: {data}}; 
 }
